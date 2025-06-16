@@ -3,7 +3,7 @@ package com.example.days.domain.resolution.controller
 import com.example.days.domain.resolution.dto.response.SearchLogSearchResponse
 import com.example.days.domain.resolution.dto.response.SearchResponse
 import com.example.days.domain.resolution.service.ResolutionSearchService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.data.domain.Page

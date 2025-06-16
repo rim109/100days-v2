@@ -7,7 +7,7 @@ import com.example.days.domain.post.dto.response.PostResponse
 import com.example.days.domain.post.dto.response.PostWithCommentResponse
 import com.example.days.domain.post.model.PostType
 import com.example.days.domain.post.service.PostService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

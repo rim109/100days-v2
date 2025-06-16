@@ -4,8 +4,8 @@ import com.example.days.domain.resolution.dto.request.ResolutionRequest
 import com.example.days.domain.resolution.dto.response.ResolutionResponse
 import com.example.days.domain.resolution.dto.response.SimpleResolutionResponse
 import com.example.days.domain.resolution.service.ResolutionService
-import com.example.days.global.common.SortOrder
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.exception.SortOrder
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page

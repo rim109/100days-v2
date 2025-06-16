@@ -1,7 +1,7 @@
 package com.example.days.domain.category.model
 
 import com.example.days.domain.category.repository.CategoryRepository
-import com.example.days.global.common.exception.common.NicknameExistException
+import com.example.days.global.exception.common.NicknameExistException
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
@@ -28,6 +28,6 @@ class Category(
 
 fun checkingNameExists(name: String, categoryRepository: CategoryRepository) {
     if (categoryRepository.existsByName(name)) {
-        throw NicknameExistException(name)
+        throw com.example.days.global.exception.common.NicknameExistException(name)
     }
 }

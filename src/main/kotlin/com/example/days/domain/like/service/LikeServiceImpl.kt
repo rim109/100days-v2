@@ -7,9 +7,9 @@ import com.example.days.domain.resolution.model.Resolution
 import com.example.days.domain.resolution.repository.ResolutionRepository
 import com.example.days.domain.user.model.User
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.exception.common.LikeAlreadyProcessedException
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.exception.common.LikeAlreadyProcessedException
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.security.UserPrincipal
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

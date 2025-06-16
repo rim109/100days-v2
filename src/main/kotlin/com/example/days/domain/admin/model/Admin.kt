@@ -3,8 +3,8 @@ package com.example.days.domain.admin.model
 import com.example.days.domain.admin.repository.AdminRepository
 import com.example.days.domain.user.model.Status
 import com.example.days.domain.user.model.UserRole
-import com.example.days.global.common.exception.common.NicknameExistException
-import com.example.days.global.common.exception.user.NoSearchUserByEmailException
+import com.example.days.global.exception.common.NicknameExistException
+import com.example.days.global.exception.user.NoSearchUserByEmailException
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
@@ -50,6 +50,6 @@ fun checkingEmailAndNicknameExists(email: String, nickname: String, adminReposit
     }
 
     if (adminRepository.existsByNickname(nickname)) {
-        throw NicknameExistException(nickname)
+        throw com.example.days.global.exception.common.NicknameExistException(nickname)
     }
 }

@@ -2,13 +2,13 @@ package com.example.days.domain.user.repository
 
 import com.example.days.domain.user.model.QUser
 import com.example.days.domain.user.model.User
-import com.example.days.global.infra.queryDSL.QueryDslSupport
+import com.example.days.global.queryDSL.QueryDslSupport
 import org.springframework.stereotype.Repository
 
 @Repository
 class UserRepositoryImpl : QueryDslSupport(), CustomUserRepository {
 
-    private val user = QUser.user
+    private val user = Quser.user
 
     override fun searchUserByNickname(nickname: String): List<User> {
         return queryFactory.selectFrom(user)

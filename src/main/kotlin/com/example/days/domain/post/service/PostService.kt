@@ -6,7 +6,7 @@ import com.example.days.domain.post.dto.response.PostListResponse
 import com.example.days.domain.post.dto.response.PostResponse
 import com.example.days.domain.post.dto.response.PostWithCommentResponse
 import com.example.days.domain.post.model.PostType
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 
 interface PostService {
 

@@ -3,7 +3,7 @@ package com.example.days.domain.comment.service
 import com.example.days.domain.comment.dto.request.CommentRequest
 import com.example.days.domain.comment.dto.response.CommentResponse
 import com.example.days.domain.post.dto.response.DeleteResponse
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 
 interface CommentService {
 

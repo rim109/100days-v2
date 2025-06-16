@@ -2,7 +2,7 @@ package com.example.days.domain.like.controller
 
 import com.example.days.domain.like.dto.response.LikeStatusResponse
 import com.example.days.domain.like.service.LikeService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal

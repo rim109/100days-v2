@@ -10,7 +10,7 @@ import com.example.days.domain.messages.dto.request.CreateMessageRequest
 import com.example.days.domain.messages.dto.response.AdminMessagesSendResponse
 import com.example.days.domain.report.dto.response.UserReportResponse
 import com.example.days.domain.user.dto.response.UserResponse
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page

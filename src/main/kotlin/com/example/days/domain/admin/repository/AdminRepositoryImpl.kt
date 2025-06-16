@@ -3,7 +3,7 @@ package com.example.days.domain.admin.repository
 import com.example.days.domain.user.model.QUser
 import com.example.days.domain.user.model.Status
 import com.example.days.domain.user.model.User
-import com.example.days.global.infra.queryDSL.QueryDslSupport
+import com.example.days.global.queryDSL.QueryDslSupport
 import com.querydsl.core.BooleanBuilder
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl

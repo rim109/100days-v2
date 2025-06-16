@@ -18,14 +18,14 @@ import com.example.days.domain.user.dto.response.UserResponse
 import com.example.days.domain.user.model.Status
 import com.example.days.domain.user.model.UserRole
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.exception.common.AlreadyBANException
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.common.exception.user.MismatchPasswordException
-import com.example.days.global.common.exception.user.NoSearchUserByEmailException
-import com.example.days.global.common.exception.user.UserNotFoundException
-import com.example.days.global.common.exception.user.UserSuspendedException
-import com.example.days.global.infra.regex.RegexFunc
-import com.example.days.global.infra.security.jwt.JwtPlugin
+import com.example.days.global.exception.common.AlreadyBANException
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.exception.user.MismatchPasswordException
+import com.example.days.global.exception.user.NoSearchUserByEmailException
+import com.example.days.global.exception.user.UserNotFoundException
+import com.example.days.global.exception.user.UserSuspendedException
+import com.example.days.global.regex.RegexFunc
+import com.example.days.global.security.jwt.JwtPlugin
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
@@ -98,7 +98,7 @@ class AdminServiceImpl(
     override fun userBanByAdmin(userId: Long, req: UserBanRequest): String {
         val user = userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
         if(user.status == Status.BAN){
-            throw AlreadyBANException("이미 밴 처리된 계정입니다.")
+            throw com.example.days.global.exception.common.AlreadyBANException("이미 밴 처리된 계정입니다.")
         }
         user.period= req.period
         user.userBanByAdmin()

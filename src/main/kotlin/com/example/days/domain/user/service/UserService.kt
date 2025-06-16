@@ -7,7 +7,7 @@ import com.example.days.domain.user.dto.response.AccountSearchResponse
 import com.example.days.domain.user.dto.response.LoginResponse
 import com.example.days.domain.user.dto.response.ModifyMyInfoResponse
 import com.example.days.domain.user.dto.response.SignUpResponse
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 
 interface UserService {
 

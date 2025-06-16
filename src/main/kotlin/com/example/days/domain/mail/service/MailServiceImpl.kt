@@ -1,9 +1,9 @@
 package com.example.days.domain.mail.service
 
 import com.example.days.domain.mail.dto.EmailRequest
-import com.example.days.global.common.exception.user.AuthCodeMismatchException
-import com.example.days.global.infra.mail.MailUtility
-import com.example.days.global.infra.redis.RedisUtil
+import com.example.days.global.exception.user.AuthCodeMismatchException
+import com.example.days.global.mail.MailUtility
+import com.example.days.global.redis.RedisUtil
 import com.example.days.global.support.MailType
 import org.springframework.stereotype.Service
 

@@ -7,10 +7,10 @@ import com.example.days.domain.comment.repository.CommentRepository
 import com.example.days.domain.post.dto.response.DeleteResponse
 import com.example.days.domain.post.repository.PostRepository
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.exception.auth.PermissionDeniedException
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.common.exception.user.UserNotFoundException
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.exception.auth.PermissionDeniedException
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.exception.user.UserNotFoundException
+import com.example.days.global.security.UserPrincipal
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -46,7 +46,7 @@ class CommentServiceImpl(
         if (comment.userId.id == userId.id) {
             comment.comment = request.comment
         } else {
-            throw PermissionDeniedException()
+            throw com.example.days.global.exception.auth.PermissionDeniedException()
         }
 
         return commentRepository.save(comment).let { CommentResponse.from(it) }
@@ -58,7 +58,7 @@ class CommentServiceImpl(
         val comment = commentRepository.findByIdOrNull(commentId) ?: throw ModelNotFoundException("댓글", commentId)
 
         if (comment.userId.id == userId.id) commentRepository.delete(comment)
-        else throw PermissionDeniedException()
+        else throw com.example.days.global.exception.auth.PermissionDeniedException()
 
         return DeleteResponse("${user.nickname}님 댓글이 삭제 처리되었습니다.")
     }

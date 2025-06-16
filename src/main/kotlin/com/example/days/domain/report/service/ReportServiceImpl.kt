@@ -28,15 +28,15 @@ class ReportServiceImpl(
         val user = userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
 
         if (reportedUserAccountId.status == Status.BAN || reportedUserAccountId.status == Status.WITHDRAW || user.status == Status.BAN || user.status == Status.WITHDRAW) {
-            throw NotReportException("이미 밴이나 탈퇴처리되어 있어 신고할 수 없습니다")
+            throw com.example.days.global.exception.common.NotReportException("이미 밴이나 탈퇴처리되어 있어 신고할 수 없습니다")
         }
 
         if (user.accountId == req.reportedUserAccountId) {
-            throw NotSelfReportException("본인은 본인을 신고할 수 없습니다.")
+            throw com.example.days.global.exception.common.NotSelfReportException("본인은 본인을 신고할 수 없습니다.")
         }
 
         if (reportedUserAccountId.countReport >= 10) {
-            throw AlreadyTenReportException("이미 10번 신고 처리되어 밴 처리 진행중입니다.")
+            throw com.example.days.global.exception.common.AlreadyTenReportException("이미 10번 신고 처리되어 밴 처리 진행중입니다.")
         }
 
 

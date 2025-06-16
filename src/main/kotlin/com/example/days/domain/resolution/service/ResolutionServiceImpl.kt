@@ -6,10 +6,9 @@ import com.example.days.domain.resolution.dto.response.ResolutionResponse
 import com.example.days.domain.resolution.dto.response.SimpleResolutionResponse
 import com.example.days.domain.resolution.repository.ResolutionRepository
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.SortOrder
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.common.exception.auth.PermissionDeniedException
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.exception.SortOrder
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.security.UserPrincipal
 import org.springframework.data.domain.Page
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.repository.findByIdOrNull
@@ -56,7 +55,7 @@ class ResolutionServiceImpl(
         if (updatedResolution.author.id == userId) {
             updatedResolution.updateResolution(request.title, request.description, category)
             return ResolutionResponse.from(updatedResolution, true)
-        } else throw PermissionDeniedException()
+        } else throw com.example.days.global.exception.auth.PermissionDeniedException()
 
     }
 
@@ -65,7 +64,7 @@ class ResolutionServiceImpl(
         val resolution = getByIdOrNull(resolutionId)
         if (resolution.author.id == userId) {
             resolutionRepository.delete(resolution)
-        } else throw PermissionDeniedException()
+        } else throw com.example.days.global.exception.auth.PermissionDeniedException()
     }
 
     override fun getResolutionRanking(): List<SimpleResolutionResponse> {
@@ -95,7 +94,7 @@ class ResolutionServiceImpl(
         if (resolution.author.id == userId){
             return ResolutionResponse.from(resolution, true)
         }
-        else throw PermissionDeniedException()
+        else throw com.example.days.global.exception.auth.PermissionDeniedException()
     }
 
     override fun getMyResolutionListPaginated(page: Int, sortOrder: SortOrder?, userId: Long): Page<SimpleResolutionResponse> {

@@ -1,7 +1,7 @@
 package com.example.days.domain.like.service
 
 import com.example.days.domain.like.dto.response.LikeStatusResponse
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 
 interface LikeService {
     fun insertLike(resolutionId: Long, userId: UserPrincipal)

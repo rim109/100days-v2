@@ -7,7 +7,7 @@ import com.example.days.domain.report.dto.response.CommentReportResponse
 import com.example.days.domain.report.dto.response.PostReportResponse
 import com.example.days.domain.report.dto.response.UserReportResponse
 import com.example.days.domain.report.service.ReportService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

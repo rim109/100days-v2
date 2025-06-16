@@ -10,11 +10,11 @@ import com.example.days.domain.messages.repository.AdminMessagesRepository
 import com.example.days.domain.messages.repository.MessagesRepository
 import com.example.days.domain.user.model.Status
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.common.exception.common.NoReceiverMessagesException
-import com.example.days.global.common.exception.common.NoSendMessagesException
-import com.example.days.global.common.exception.common.NotMessagesException
-import com.example.days.global.common.exception.user.UserNotFoundException
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.exception.common.NoReceiverMessagesException
+import com.example.days.global.exception.common.NoSendMessagesException
+import com.example.days.global.exception.common.NotMessagesException
+import com.example.days.global.exception.user.UserNotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
@@ -33,7 +33,7 @@ class MessagesServiceImpl(
         val user = userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
 
         if (receiverAccountId.status == Status.BAN || receiverAccountId.status == Status.WITHDRAW || user.status == Status.BAN || user.status == Status.WITHDRAW) {
-            throw NotMessagesException("이미 밴이나 탈퇴처리되어 있어 쪽지를 보낼 수도 받을 수도 없습니다!")
+            throw com.example.days.global.exception.common.NotMessagesException("이미 밴이나 탈퇴처리되어 있어 쪽지를 보낼 수도 받을 수도 없습니다!")
         }
 
         val messages = messagesRepository.save(
@@ -56,7 +56,7 @@ class MessagesServiceImpl(
             throw ModelNotFoundException("Messages", id)
         }
         if (sender.sender.id != userId) {
-            throw NoSendMessagesException(id)
+            throw com.example.days.global.exception.common.NoSendMessagesException(id)
         }
         sender.readStatus()
         messagesRepository.save(sender)
@@ -76,7 +76,7 @@ class MessagesServiceImpl(
             throw ModelNotFoundException("Messages", id)
         }
         if (receiver.receiver.id != userId) {
-            throw NoReceiverMessagesException(id)
+            throw com.example.days.global.exception.common.NoReceiverMessagesException(id)
         }
         receiver.readStatus()
         messagesRepository.save(receiver)
@@ -94,7 +94,7 @@ class MessagesServiceImpl(
     override fun deleteSenderMessages(id: Long, userId: Long) {
         val messages = messagesRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("Messages", id)
         if (messages.sender.id != userId) {
-            throw NoSendMessagesException(id)
+            throw com.example.days.global.exception.common.NoSendMessagesException(id)
         }
         messages.deletedBySender()
         messagesRepository.save(messages)
@@ -104,7 +104,7 @@ class MessagesServiceImpl(
     override fun deleteReceiverMessages(id: Long, userId: Long) {
         val messages = messagesRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("Messages", id)
         if (messages.receiver.id != userId) {
-            throw NoReceiverMessagesException(id)
+            throw com.example.days.global.exception.common.NoReceiverMessagesException(id)
         }
         messages.deletedByReceiver()
         messagesRepository.save(messages)
@@ -117,7 +117,9 @@ class MessagesServiceImpl(
         val receiver = adminMessagesRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("AdminMessages", id)
         if (receiver.deletedByReceiver) throw ModelNotFoundException("Messages", id)
 
-        if (receiver.receiver.id != user.id) throw NoReceiverMessagesException(userId)
+        if (receiver.receiver.id != user.id) throw com.example.days.global.exception.common.NoReceiverMessagesException(
+            userId
+        )
 
         receiver.readStatus()
         adminMessagesRepository.save(receiver)
@@ -138,7 +140,7 @@ class MessagesServiceImpl(
         val adminMessages =
             adminMessagesRepository.findByIdOrNull(id) ?: throw ModelNotFoundException("AdminMessages", id)
         if (adminMessages.receiver.id != user.id && admin.id != userId) {
-            throw NoReceiverMessagesException(id)
+            throw com.example.days.global.exception.common.NoReceiverMessagesException(id)
         }
         adminMessages.deletedByReceiver()
         adminMessagesRepository.save(adminMessages)

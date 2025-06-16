@@ -5,7 +5,7 @@ import com.example.days.domain.messages.dto.response.AdminMessagesSendResponse
 import com.example.days.domain.messages.dto.response.MessageSendResponse
 import com.example.days.domain.messages.dto.response.MessagesReceiveResponse
 import com.example.days.domain.messages.service.MessagesService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page

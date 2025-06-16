@@ -1,6 +1,6 @@
 package com.example.days.global.support
 
-import com.example.days.global.infra.regex.RegexFunc
+import com.example.days.global.regex.RegexFunc
 import org.springframework.stereotype.Component
 import java.util.*
 

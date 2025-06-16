@@ -3,7 +3,7 @@ package com.example.days.domain.comment.controller
 import com.example.days.domain.comment.dto.request.CommentRequest
 import com.example.days.domain.comment.dto.response.CommentResponse
 import com.example.days.domain.comment.service.CommentService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

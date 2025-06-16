@@ -4,7 +4,7 @@ import com.example.days.domain.mail.dto.EmailRequest
 import com.example.days.domain.user.dto.request.*
 import com.example.days.domain.user.dto.response.*
 import com.example.days.domain.user.service.UserService
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus

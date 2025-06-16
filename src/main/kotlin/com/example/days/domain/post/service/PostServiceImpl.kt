@@ -12,13 +12,13 @@ import com.example.days.domain.post.model.PostType
 import com.example.days.domain.post.repository.PostRepository
 import com.example.days.domain.resolution.repository.ResolutionRepository
 import com.example.days.domain.user.repository.UserRepository
-import com.example.days.global.common.exception.auth.PermissionDeniedException
-import com.example.days.global.common.exception.common.CheckAlreadyCompletedException
-import com.example.days.global.common.exception.common.ModelNotFoundException
-import com.example.days.global.common.exception.common.ResolutionAlreadyCompletedException
-import com.example.days.global.common.exception.common.TypeNotFoundException
-import com.example.days.global.common.exception.user.UserNotFoundException
-import com.example.days.global.infra.security.UserPrincipal
+import com.example.days.global.exception.auth.PermissionDeniedException
+import com.example.days.global.exception.common.CheckAlreadyCompletedException
+import com.example.days.global.exception.common.ModelNotFoundException
+import com.example.days.global.exception.common.ResolutionAlreadyCompletedException
+import com.example.days.global.exception.common.TypeNotFoundException
+import com.example.days.global.exception.user.UserNotFoundException
+import com.example.days.global.security.UserPrincipal
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -52,7 +52,7 @@ class PostServiceImpl(
             post.comments.addAll(comments)
             return PostWithCommentResponse.from(post)
         }
-        else throw PermissionDeniedException()
+        else throw com.example.days.global.exception.auth.PermissionDeniedException()
     }
 
     // post 작성 > 데일리 체크에서 달성도 체크 후 이쪽으로 넘어옴
@@ -69,7 +69,7 @@ class PostServiceImpl(
         if (userId.id == resolution.author.id){
             val user = userRepository.findByIdOrNull(userId.id) ?: throw UserNotFoundException()
             when {
-                resolution.dailyStatus -> throw CheckAlreadyCompletedException()
+                resolution.dailyStatus -> throw com.example.days.global.exception.common.CheckAlreadyCompletedException()
                 resolution.completeStatus -> throw ResolutionAlreadyCompletedException()
                 else -> return resolution
                     .let {
@@ -79,7 +79,7 @@ class PostServiceImpl(
                     .let { PostResponse.from(it)}
             }
         }
-        else throw PermissionDeniedException()
+        else throw com.example.days.global.exception.auth.PermissionDeniedException()
     }
 
     // post 수정
@@ -99,7 +99,7 @@ class PostServiceImpl(
             post.updatePost(request.title, request.content, request.imageUrl, type)
             return PostResponse.from(post)
         }
-        else throw PermissionDeniedException()
+        else throw com.example.days.global.exception.auth.PermissionDeniedException()
     }
 
     // post 삭제
@@ -112,7 +112,7 @@ class PostServiceImpl(
         if (post.userId?.id == userId.id) {
             postRepository.delete(post)
         } else {
-            throw PermissionDeniedException()
+            throw com.example.days.global.exception.auth.PermissionDeniedException()
         }
 
         return DeleteResponse("${user.nickname} 님 게시글이 삭제 처리되었습니다.")

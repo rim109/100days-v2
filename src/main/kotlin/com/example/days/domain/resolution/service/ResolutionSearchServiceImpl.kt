@@ -3,7 +3,7 @@ package com.example.days.domain.resolution.service
 import com.example.days.domain.resolution.dto.response.SearchLogSearchResponse
 import com.example.days.domain.resolution.dto.response.SearchResponse
 import com.example.days.domain.resolution.repository.ResolutionRepository
-import com.example.days.global.common.exception.common.NotHaveSearchException
+import com.example.days.global.exception.common.NotHaveSearchException
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
@@ -55,7 +55,7 @@ class ResolutionSearchServiceImpl(
         val count = redisTemplate.opsForList().remove(key, 1, value)
 
         if (count == 0L) {
-            throw NotHaveSearchException("")
+            throw com.example.days.global.exception.common.NotHaveSearchException("")
         }
     }
 }
