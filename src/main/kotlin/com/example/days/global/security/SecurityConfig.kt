@@ -16,9 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 @EnableWebSecurity
 @EnableMethodSecurity
 class SecurityConfig(
-    private val jwtAuthenticationFilter: JwtAuthenticationFilter,
-//    private val clientRegistrationRepository: ClientRegistrationRepository,
-//    private val oauth2LoginService: OAuth2LoginService
+    private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) {
 
     @Bean
@@ -32,23 +30,11 @@ class SecurityConfig(
             .headers { it.frameOptions { option -> option.disable() } }
             .authorizeHttpRequests {
                 // common
-                it.requestMatchers(AntPathRequestMatcher("/api/mail/**")).permitAll() // mail
-                it.requestMatchers(AntPathRequestMatcher("/api/users/search/**")).permitAll() // search
-                it.requestMatchers(AntPathRequestMatcher("/api/messages/**")).permitAll() // message
-                it.requestMatchers(AntPathRequestMatcher("/api/reports/**")).permitAll() // report
+                it.requestMatchers(AntPathRequestMatcher("/api/**")).permitAll()
 
-                // user
-                it.requestMatchers(AntPathRequestMatcher("/api/users/login")).permitAll() // login
-                it.requestMatchers(AntPathRequestMatcher("/api/users/signup")).permitAll() // signUp
-
-                // admin
-                it.requestMatchers(AntPathRequestMatcher("/api/admins/**")).permitAll() // login
-
-                // swagger
                 it.requestMatchers(AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                 it.requestMatchers(AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
 
-                // 소셜로그인 임시처리 > 나중에 경로 확인 후 전체수정 필요
                 it.requestMatchers(AntPathRequestMatcher("/login/oauth2")).permitAll()
                 it.requestMatchers(AntPathRequestMatcher("/login/oauth2/callback")).permitAll()
                 it.requestMatchers(AntPathRequestMatcher("/error")).permitAll()
